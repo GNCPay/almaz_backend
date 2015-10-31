@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="CMSDB">
+  <DataContextMoniker Name="/CMSDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="4d644e3c-d299-4fa4-a4d1-939087e4465e" absoluteBounds="0.75, 2, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CMSDBDataContext/CardType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="486deb1e-ee57-4d1d-9df3-a690b03e1e35" absoluteBounds="0.765, 2.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3183eaec-7b1e-433b-b6e2-43f5d0fbc156" absoluteBounds="7.75, 0.625, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/CMSDBDataContext/CardTrace" />
+      <nestedChildShapes>
+        <elementListCompartment Id="767d5b4d-6897-450c-af35-5c4eaa240301" absoluteBounds="7.765, 1.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2a80da7b-203e-4354-bffb-470b80e68941" absoluteBounds="3.625, 1.5, 2, 1.9631982421875">
+      <DataClassMoniker Name="/CMSDBDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="94448da9-67c3-4b4f-8ed1-ae038b1ee92a" absoluteBounds="3.64, 1.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b40e1ce9-b398-489f-a3e4-b1f74a69ad44" absoluteBounds="8.125, 3.625, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/CMSDBDataContext/CardActionLog" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ad39d37e-fd6f-4e57-882e-6e51d8adbef6" absoluteBounds="8.14, 4.085, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="26cb5617-dfa6-4207-91b1-aadfc7565f90" absoluteBounds="4.625, 4.375, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/CMSDBDataContext/Card" />
+      <nestedChildShapes>
+        <elementListCompartment Id="69c8221e-771f-4b8e-a038-0892f5a5cac9" absoluteBounds="4.64, 4.835, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.625 : 5.46235270182292); (8.125 : 5.46235270182292)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CMSDBDataContext/Card/Card_CardActionLog" />
+      <nodes>
+        <classShapeMoniker Id="26cb5617-dfa6-4207-91b1-aadfc7565f90" />
+        <classShapeMoniker Id="b40e1ce9-b398-489f-a3e4-b1f74a69ad44" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 3.57859537760417); (1.75 : 6.31810628255208); (4.625 : 6.31810628255208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CMSDBDataContext/CardType/CardType_Card" />
+      <nodes>
+        <classShapeMoniker Id="4d644e3c-d299-4fa4-a4d1-939087e4465e" />
+        <classShapeMoniker Id="26cb5617-dfa6-4207-91b1-aadfc7565f90" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ALMAZ" EntityNamespace="Data" ContextNamespace="Data" Class="CMSDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=210.211.116.19;Initial Catalog=ALMAZ;Persist Security Info=True;User ID=sa;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ALMAZConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CardTypes" Member="CardTypes">
+    <Type Name="CardType">
+      <Column Name="TypeCode" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PrepaidValue" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="AddValue" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="CardType_Card" Member="Cards" ThisKey="TypeCode" OtherKey="CardType" Type="Card" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CardTraces" Member="CardTraces">
+    <Type Name="CardTrace">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CardTrace" Member="CardTrace1" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CardNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CustomerFullName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CardID" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Role" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="IsActived" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CardActionLogs" Member="CardActionLogs">
+    <Type Name="CardActionLog">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActionTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CardId" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="ActionCode" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ActionBy" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ActionAt" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ReferenceID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="StartBalance" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="EndBalance" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Card_CardActionLog" Member="Card" ThisKey="CardId" OtherKey="CardId" Type="Card" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cards" Member="Cards">
+    <Type Name="Card">
+      <Column Name="CardId" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CardNumber" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="CardType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="PrepaidAmount" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="CardOwnerName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerCIF" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="Valid" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Expire" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsActived" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsLockout" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ActivedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LockoutDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RegisterAt" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CardInfo" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Card_CardActionLog" Member="CardActionLogs" ThisKey="CardId" OtherKey="CardId" Type="CardActionLog" />
+      <Association Name="CardType_Card" Member="CardType1" ThisKey="CardType" OtherKey="TypeCode" Type="CardType" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

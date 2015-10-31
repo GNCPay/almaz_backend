@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CMSDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CardActionLogs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActionTime" Type="datetime" Nullable="false" />
+    <Property Name="CardNumber" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="ActionCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ActionBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Note" Type="ntext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cards">
+    <Key>
+      <PropertyRef Name="CardNumber" />
+    </Key>
+    <Property Name="CardNumber" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="CardType" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PrepaidAmount" Type="bigint" Nullable="false" />
+    <Property Name="CardOwnerName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CustomerCIF" Type="varchar" MaxLength="64" />
+    <Property Name="Valid" Type="varchar" MaxLength="4" />
+    <Property Name="Expire" Type="varchar" MaxLength="4" />
+    <Property Name="IsActived" Type="bit" Nullable="false" />
+    <Property Name="IsLockout" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ActivedDate" Type="datetime" />
+    <Property Name="LockoutDate" Type="datetime" />
+    <Property Name="CardInfo" Type="ntext" />
+  </EntityType>
+  <EntityType Name="CardTypes">
+    <Key>
+      <PropertyRef Name="TypeCode" />
+    </Key>
+    <Property Name="TypeCode" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PrepaidValue" Type="bigint" Nullable="false" />
+    <Property Name="AddValue" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CardActionLogs_Cards">
+    <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
+    <End Role="CardActionLogs" Type="Self.CardActionLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cards">
+        <PropertyRef Name="CardNumber" />
+      </Principal>
+      <Dependent Role="CardActionLogs">
+        <PropertyRef Name="CardNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cards_CardTypes">
+    <End Role="CardTypes" Type="Self.CardTypes" Multiplicity="1" />
+    <End Role="Cards" Type="Self.Cards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CardTypes">
+        <PropertyRef Name="TypeCode" />
+      </Principal>
+      <Dependent Role="Cards">
+        <PropertyRef Name="CardType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CMSDBStoreContainer">
+    <EntitySet Name="CardActionLogs" EntityType="Self.CardActionLogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cards" EntityType="Self.Cards" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CardTypes" EntityType="Self.CardTypes" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CardActionLogs_Cards" Association="Self.FK_CardActionLogs_Cards">
+      <End Role="Cards" EntitySet="Cards" />
+      <End Role="CardActionLogs" EntitySet="CardActionLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cards_CardTypes" Association="Self.FK_Cards_CardTypes">
+      <End Role="CardTypes" EntitySet="CardTypes" />
+      <End Role="Cards" EntitySet="Cards" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

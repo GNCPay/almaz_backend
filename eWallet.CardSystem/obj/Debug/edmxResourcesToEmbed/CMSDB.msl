@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CMSDBStoreContainer" CdmEntityContainer="ALMAZEntities">
+    <EntitySetMapping Name="CardActionLogs">
+      <EntityTypeMapping TypeName="CMSDB.CardActionLog">
+        <MappingFragment StoreEntitySet="CardActionLogs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ActionTime" ColumnName="ActionTime" />
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+          <ScalarProperty Name="ActionCode" ColumnName="ActionCode" />
+          <ScalarProperty Name="ActionBy" ColumnName="ActionBy" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cards">
+      <EntityTypeMapping TypeName="CMSDB.Card">
+        <MappingFragment StoreEntitySet="Cards">
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+          <ScalarProperty Name="CardType" ColumnName="CardType" />
+          <ScalarProperty Name="PrepaidAmount" ColumnName="PrepaidAmount" />
+          <ScalarProperty Name="CardOwnerName" ColumnName="CardOwnerName" />
+          <ScalarProperty Name="CustomerCIF" ColumnName="CustomerCIF" />
+          <ScalarProperty Name="Valid" ColumnName="Valid" />
+          <ScalarProperty Name="Expire" ColumnName="Expire" />
+          <ScalarProperty Name="IsActived" ColumnName="IsActived" />
+          <ScalarProperty Name="IsLockout" ColumnName="IsLockout" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ActivedDate" ColumnName="ActivedDate" />
+          <ScalarProperty Name="LockoutDate" ColumnName="LockoutDate" />
+          <ScalarProperty Name="CardInfo" ColumnName="CardInfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CardTypes">
+      <EntityTypeMapping TypeName="CMSDB.CardType">
+        <MappingFragment StoreEntitySet="CardTypes">
+          <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="PrepaidValue" ColumnName="PrepaidValue" />
+          <ScalarProperty Name="AddValue" ColumnName="AddValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

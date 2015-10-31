@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CMSDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CardActionLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActionTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CardNumber" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ActionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ActionBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Card" Relationship="Self.FK_CardActionLogs_Cards" FromRole="CardActionLogs" ToRole="Cards" />
+  </EntityType>
+  <EntityType Name="Card">
+    <Key>
+      <PropertyRef Name="CardNumber" />
+    </Key>
+    <Property Name="CardNumber" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CardType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrepaidAmount" Type="Int64" Nullable="false" />
+    <Property Name="CardOwnerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CustomerCIF" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="Valid" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="Expire" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="IsActived" Type="Boolean" Nullable="false" />
+    <Property Name="IsLockout" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ActivedDate" Type="DateTime" Precision="3" />
+    <Property Name="LockoutDate" Type="DateTime" Precision="3" />
+    <Property Name="CardInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CardActionLogs" Relationship="Self.FK_CardActionLogs_Cards" FromRole="Cards" ToRole="CardActionLogs" />
+    <NavigationProperty Name="CardType1" Relationship="Self.FK_Cards_CardTypes" FromRole="Cards" ToRole="CardTypes" />
+  </EntityType>
+  <EntityType Name="CardType">
+    <Key>
+      <PropertyRef Name="TypeCode" />
+    </Key>
+    <Property Name="TypeCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PrepaidValue" Type="Int64" Nullable="false" />
+    <Property Name="AddValue" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Cards" Relationship="Self.FK_Cards_CardTypes" FromRole="CardTypes" ToRole="Cards" />
+  </EntityType>
+  <Association Name="FK_CardActionLogs_Cards">
+    <End Role="Cards" Type="Self.Card" Multiplicity="1" />
+    <End Role="CardActionLogs" Type="Self.CardActionLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cards">
+        <PropertyRef Name="CardNumber" />
+      </Principal>
+      <Dependent Role="CardActionLogs">
+        <PropertyRef Name="CardNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cards_CardTypes">
+    <End Role="CardTypes" Type="Self.CardType" Multiplicity="1" />
+    <End Role="Cards" Type="Self.Card" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CardTypes">
+        <PropertyRef Name="TypeCode" />
+      </Principal>
+      <Dependent Role="Cards">
+        <PropertyRef Name="CardType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ALMAZEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CardActionLogs" EntityType="Self.CardActionLog" />
+    <EntitySet Name="Cards" EntityType="Self.Card" />
+    <EntitySet Name="CardTypes" EntityType="Self.CardType" />
+    <AssociationSet Name="FK_CardActionLogs_Cards" Association="Self.FK_CardActionLogs_Cards">
+      <End Role="Cards" EntitySet="Cards" />
+      <End Role="CardActionLogs" EntitySet="CardActionLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cards_CardTypes" Association="Self.FK_Cards_CardTypes">
+      <End Role="CardTypes" EntitySet="CardTypes" />
+      <End Role="Cards" EntitySet="Cards" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
